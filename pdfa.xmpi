@@ -43,9 +43,9 @@ xmlns:pdfaProperty="http://www.aiim.org/pdfa/ns/property#"
 </rdf:Description> 
 <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> 
 <xmp:CreatorTool>LaTeX with hyperref package</xmp:CreatorTool> 
-<xmp:ModifyDate>2017-03-26T00:00:53-07:00</xmp:ModifyDate> 
-<xmp:CreateDate>2017-03-26T00:00:53-07:00</xmp:CreateDate> 
-<xmp:MetadataDate>2017-03-26T00:00:53-07:00</xmp:MetadataDate> 
+<xmp:ModifyDate>2017-03-26T16:28:42-07:00</xmp:ModifyDate> 
+<xmp:CreateDate>2017-03-26T16:28:42-07:00</xmp:CreateDate> 
+<xmp:MetadataDate>2017-03-26T16:28:42-07:00</xmp:MetadataDate> 
 </rdf:Description> 
 <rdf:Description rdf:about="" xmlns:xmpRights = "http://ns.adobe.com/xap/1.0/rights/"> 
 <xmpRights:Marked>True</xmpRights:Marked>
@@ -54,7 +54,7 @@ xmlns:pdfaProperty="http://www.aiim.org/pdfa/ns/property#"
 </rdf:Description> 
 <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"> 
 <xmpMM:DocumentID>uuid:4A50C1DC-24BE-4DFA-D8B2-4CABD0EE6404</xmpMM:DocumentID> 
-<xmpMM:InstanceID>uuid:75C0FC78-209A-0316-8389-07BBEF806AE4</xmpMM:InstanceID> 
+<xmpMM:InstanceID>uuid:561B4F43-CD39-E22A-40F1-F82847A59A12</xmpMM:InstanceID> 
 </rdf:Description> 
 </rdf:RDF> 
 </x:xmpmeta> 

@@ -393,7 +393,7 @@ Now we come to a number of useful results which shall allow us to describe the m
 
 \begin{lemma}
 \label{OmegaModLemma}
-Let $u\in\Z[\omega]$ such that $u\equiv 1\pmod{\delta}.$ Then $u \equiv \omega^m\pmod{\delta^3},$ for some $m\in\{0,\ldots,3\}.$
+Let $u\in\Z[\omega].$ Then $u\equiv 1\pmod{\delta}$ if, and only if, $u \equiv \omega^m\pmod{\delta^3},$ for some $m\in\{0,\ldots,3\}.$
 \end{lemma}
 \begin{proof}
 We can see this from the fact that \[\Z[\omega]/(\delta^3) = \{1,\omega,\omega^2,\omega^3,0,1+\omega,1+\omega^2,1+\omega^3\}.\]
@@ -477,7 +477,7 @@ Let $\boldsymbol{v}$ be a vector with entries in $\Z[\omega]$ such that $\boldsy
 where $\ell\in\{1,\ldots,8\}.$
 \end{lemma}
 \begin{proof}
-Note that $\boldsymbol{v}^\dagger\boldsymbol{v} = 1 + 0\sqrt{2}.$ Observe that if $x = a\omega^3+b\omega^2+c\omega+d,$ then $x^\dagger x = (a^2+b^2+c^2+d^2)+(ab + bc + cd - ad)\sqrt{2}\in\Z[\sqrt{2}].$ This fact can immediately be generalised to sums of elements in $\Z[\sqrt{2}],$ whence we see that \[
+Note that $\boldsymbol{v}^\dagger\boldsymbol{v} = 1 + 0\sqrt{2}.$ Observe that if $x = a\omega^3+b\omega^2+c\omega+d,$ then $x^\dagger x = (a^2+b^2+c^2+d^2)+(ab + bc + cd - ad)\sqrt{2}\in\Z[\sqrt{2}].$ This can immediately be generalised to sums of element conjugations, whence we see that \[
 \boldsymbol{v}^\dagger\boldsymbol{v} = v^\dagger_1v_1+\ldots+v^\dagger_nv_n = \sum^n_{j=1}(a_j^2+b_j^2+c_j^2 + d_j^2) + (a_jb_j+b_jc_j+c_jd_j-a_jd_j)\sqrt{2} = 1 + 0\sqrt{2}.
 \]
 Thus $\sum^n_{j=1}(a_j^2+b_j^2+c_j^2+d_j^2) = 1,$ which implies that precisely one of
@@ -516,7 +516,7 @@ We now give an explicit presentation of the modified Giles-Selinger algorithm.
 \label{GSAlg}
 INPUT: A unitary $n\times n$ matrix $U$ with entries in $\D[\omega].$
 
-OUTPUT: A sequence $G_\ell,\ldots ,G_1$ from $(*)$ such that $G_\ell\ldots G_1U = I.$
+OUTPUT: A sequence $G_p,\ldots ,G_1$ from $(*)$ such that $G_p\ldots G_1U = I.$
 
 \begin{enumerate}\setcounter{enumi}{-1}
 \item Let $M\leftarrow U$.
@@ -529,7 +529,7 @@ OUTPUT: A sequence $G_\ell,\ldots ,G_1$ from $(*)$ such that $G_\ell\ldots G_1U 
 
 \item If $\ell\neq\jay,$ let $\vec{G} = \omega^{8-m}_{[\jay]}X_{[\ell,\jay]}.$
 \end{itemize}
-\item CASE $k > 0:$ Let $\iota,\ell$ be the first two indices such that $u_\iota,u_\ell\equiv 1\pmod{\delta}$ and $\iota < \ell.$ Then, by Lemma \ref{OmegaModLemma}, $u_\iota\equiv\omega^m\pmod{\delta^3}$ and $u_\ell\equiv\omega^q\pmod{\delta^q}$ for some $m,q\in\{0,\ldots ,3\}.$ Let $z = (q - m)\pmod{4},$ and let $\vec{G} = H_{[\iota,\ell]}\omega^{z}_{[\iota]}.$
+\item CASE $k > 0:$ Let $\iota,\ell$ be the first two indices such that $u_\iota,u_\ell\equiv 1\pmod{\delta}$ and $\iota < \ell.$ Then, by Lemma \ref{OmegaModLemma}, $u_\iota\equiv\omega^m\pmod{\delta^3}$ and $u_\ell\equiv\omega^q\pmod{\delta^3}$ for some $m,q\in\{0,\ldots ,3\}.$ Let $z = (q - m)\pmod{4},$ and let $\vec{G} = H_{[\iota,\ell]}\omega^{z}_{[\iota]}.$
 \end{enumerate}
 \item Output $\vec{G}.$ Let $M\leftarrow\vec{G}M.$ Go to step 1.
 \end{enumerate}
@@ -882,7 +882,7 @@ First, observe that, for $\jay < \kay - 1,$ \[X_{[\jay,\kay]} \approx X_{[\kay-1
 
 Observe also that $\omega_{[\iota]} \approx X_{[1,\iota]}\omega_{[1]}X_{[1,\iota]}$ for $\iota>1.$ Note that, for $\kay > 2,$ $H_{[1,\kay]} \approx X_{[2,\kay]}H_{[1,2]}X_{[2,\kay]}.$ Also, for $1 < \jay < \kay,$ we have $H_{[\jay,\kay]}\approx X_{[1,\jay]}H_{[1,\kay]}X_{[1,\jay]}.$ Taken together, these equations provide decompositions satisfying $(a)$ and $(b).$ To prove $(c)$, consider $s\edge{G}t$ and the corresponding $\vec{G} = s\edge{G_1}s_1\edge{G_2}s_2\ldots s_{n-1}\edge{G_n}t$ as defined above.
 
-First, note that $\level(G)\leq\level(\vec{G});$ this is clear, since $\level(\vec{G})$ is the maximum of the levels of $s,s_1,\ldots ,s_{n-1},t,$ which includes $s$ and $t.$ Let $\alpha$ be the extent of $G$, and let $\level(G) = (\jay,\kay,m).$ Observe that $\alpha\leq\jay;$ otherwise, the $\alpha^{th}$ column of both $s$ and $t$ would be $e_\alpha.$ But since $G$ is a generator of extent $\alpha,$ $\sem{G}e_\alpha\neq\alpha.$ This directly contradicts $\sem{G}s=t.$
+First, note that $\level(G)\leq\level(\vec{G});$ this is clear, since $\level(\vec{G})$ is the maximum of the levels of $s,s_1,\ldots ,s_{n-1},t,$ which includes $s$ and $t.$ Let $\alpha$ be the extent of $G$, and let $\level(G) = (\jay,\kay,m).$ Observe that $\alpha\leq\jay;$ otherwise, the $\alpha^{th}$ column of both $s$ and $t$ would be $e_\alpha.$ But since $G$ is a generator of extent $\alpha,$ $\sem{G}e_\alpha\neq e_\alpha.$ This directly contradicts $\sem{G}s=t.$
 
 From $(b),$ it follows that the edges $G_1,\ldots ,G_n$ all have extent at most $\alpha\leq j,$ and therefore can only act on the first $\jay$ columns of their states. It follows that the $`\jay$ parts' of the levels of $s,s_1,\ldots ,s_{n-1},t$ are all $\leq\jay.$
 
@@ -936,7 +936,7 @@ Now suppose $\level(s)\neq(0,0,0),$ and suppose the hypothesis holds for all sta
   
   Since $\level(t_\iota)<\level(s)$ for all $\iota\in\{0,\ldots ,\kay\},$ by our induction hypothesis, $\vec{N_\iota}G_\iota\approx\vec{N_{\iota-1}}$ for $\iota\in\{1,\ldots ,\kay\}.$ 
   
-By congruence, $\vec{N_{\kay}}\vec{G} = \vec{N_{\kay}}G_{\kay}G_{\kay-1}\ldots G_1\approx\vec{N_{\kay-1}}G_{\kay-1}\ldots G_1\approx\ldots \approx\vec{N_0} = \vec{N'}.$ Thus $\vec{N}\approx\vec{N'}N\approx\vec{N_{\kay}}\vec{G'}N\approx\vec{N_{\kay}}\vec{M'}G.$ The last thing to note is that $\vec{N_{\kay}}\vec{M'}\approx\vec{M},$ by uniqueness of normal sequences. 
+By congruence, $\vec{N_{\kay}}\vec{G'} = \vec{N_{\kay}}G_{\kay}G_{\kay-1}\ldots G_1\approx\vec{N_{\kay-1}}G_{\kay-1}\ldots G_1\approx\ldots \approx\vec{N_0} = \vec{N'}.$ Thus $\vec{N}\approx\vec{N'}N\approx\vec{N_{\kay}}\vec{G'}N\approx\vec{N_{\kay}}\vec{M'}G.$ The last thing to note is that $\vec{N_{\kay}}\vec{M'}\approx\vec{M},$ by uniqueness of normal sequences. 
 \end{proof}
 
 \begin{figure}
@@ -1254,7 +1254,7 @@ In what follows, we say that the {\em pivot column} of a unitary $n\times n$ mat
       \]
       \[
       = \frac{1}{\delta^{k+2}}\begin{bmatrix}
-        \lambda(\omega^{\iota+1}+\omega^{\iota+2})+\lambda\omega(a+b)\delta^3 \\ \lambda(\omega^{\iota+1}-\omega^{\iota+2})+\lambda\omega(a-b)\delta^)\\
+        \lambda(\omega^{\iota+1}+\omega^{\iota+2})+\lambda\omega(a+b)\delta^3 \\ \lambda(\omega^{\iota+1}-\omega^{\iota+2})+\lambda\omega(a-b)\delta^3 \\
         \vdots
       \end{bmatrix}
       = \frac{1}{\delta^{k+1}}\begin{bmatrix} 
@@ -1264,10 +1264,10 @@ In what follows, we say that the {\em pivot column} of a unitary $n\times n$ mat
       \end{bmatrix}.
       \]
       To justify the preceding calculation, we note that $\sqrt{2} = \delta^2\lambda^{-1}\omega^{-1}$ and
-      $\omega^{\iota+1}\pm\omega^{\iota+2}\equiv\delta\mmod{\delta^3}$. 
+      $\omega^{\iota+1}\pm\omega^{\iota+2}\equiv\omega^{\iota + 1}\delta$. 
             
       The modified Giles-Selinger algorithm specifies the syllable
-      $r\nedge{H_{[1,2]}}s$, and hence $s\edge{H_{[1,2]}}s$ is retrograde.
+      $r\nedge{H_{[1,2]}}s$, and hence $s\edge{H_{[1,2]}}r$ is retrograde.
       
 \subcase
       The pivot column of $s$ is of the form
@@ -1461,14 +1461,14 @@ Since $H_{[1,2]}\omega^2_{[1]}$ is a syllable, we have $\level(t)<\level(s).$ Mo
       
       \subsubcase $j\geq 2.$ Then the pivot column of $r = H_{[1,2]}s$ is \[
 H_{[1,2]}\boldsymbol{v} = \begin{bmatrix}  
-		\sqrt{2}\omega^{\iota}\\ 
-		\sqrt{2}\omega^{\iota}\\ 
+		\frac{1}{\sqrt{2}}\omega^{\iota}\\ 
+		\frac{1}{\sqrt{2}}\omega^{\iota}\\ 
 		0\\
 		\vdots\\
 		0
       \end{bmatrix} = \begin{bmatrix}
-      \omega^{\iota-1}\delta^2/\lambda\\
-      \omega^{\iota-1}\delta^2/\lambda\\
+      \omega^{\iota+1}\delta^2/\lambda\\
+      \omega^{\iota+1}\delta^2/\lambda\\
       0\\
       \vdots\\
       0
@@ -1684,7 +1684,7 @@ Clockwise from the top, we utilise equation $\eqref{ax-h}$ and then equations $\
  		z
       \end{bmatrix}.
       \]
-      The modified Giles-Selinger algorithm specifies syllable $r\nedge{H_{[2,\alpha]}\omega^{h-\iota}_{[2]}}q,$ and by the equations $X_{[1,2]}H_{[2,\alpha]}\approx H_{[1,\alpha]}X_{[1,2]}$ and $\omega_{[1]}X_{[1,2]} \approx X_{[1,2]}\omega_{[2]}$ (respectively $\eqref{ax-p}$ and $\eqref{ax-c}$ from Tables \ref{tab-equations2} and \ref{tab-equations}), we can take $\vec{G'} = X_{[1,2]}$ and $\vec{N'} = H_{[2,3]}:$\[ \xymatrix{
+      The modified Giles-Selinger algorithm specifies syllable $r\nedge{H_{[2,\alpha]}\omega^{h-\iota}_{[2]}}q,$ and by the equations $H_{[2,\alpha]}X_{[1,2]}\approx X_{[1,2]}H_{[1,\alpha]}$ and $\omega_{[2]}X_{[1,2]} \approx X_{[1,2]}\omega_{[1]}$ (respectively $\eqref{ax-l}$ and $\eqref{ax-d}$ from Table \ref{tab-equations}), we can take $\vec{G'} = X_{[1,2]}$ and $\vec{N'} = H_{[2,\alpha]}\omega^{h-\iota}_{[2]}:$\[ \xymatrix{
         s \ar@{=>}[d]_{H_{[1,\alpha]}\omega^{h-\iota}_{[1]}} \ar[r]^{X_{[1,2]}} &
         r \ar@{=>}[d]^{H_{[2,\alpha]}\omega^{h-\iota}_{[2]}} \\
         t \ar@{->}[r]^{X_{[1,2]}} &
@@ -1694,7 +1694,7 @@ Clockwise from the top, we utilise equation $\eqref{ax-h}$ and then equations $\
       Since $X_{[1,2]}$ does not increase $\delta$-exponents, and the normal edges are syllables, it is clear that $\level(t) = \level(q) < \level(s).$ 
       
 \subcase The pivot column of $s$ is of the form \[
-\boldsymbol{v} = \begin{bmatrix}
+\boldsymbol{v} = \frac{1}{\delta^\kay}\begin{bmatrix}
 0\,(\delta)\\
 \omega^\iota\,(\delta^3)\\
 0\,(\delta)\\
@@ -1815,15 +1815,14 @@ x_n&y_n&0&\cdots&1
 Then the edge $s\edge{X_{[2,3]}}r$ results in the following: \[
 r = \left[\begin{matrix}
 x_1&y_1&0&0&\cdots&0\\
-x_2&y_2&0&0&\cdots&0\\
-x_4&y_4&0&1&\cdots&0\\
 x_3&y_3&1&0&\cdots&0\\
+x_2&y_2&0&0&\cdots&0\\
 \vdots&\vdots&\vdots&\vdots&1&\vdots\\
 x_n&y_n&0&\cdots&0&1
 \end{matrix}
 \right].
 \]
-Thus $\level(r) = (\jay+1,0,0);$ the modified Giles-Selinger algorithm specifies the reduction step $r\nedge{X_{[2,3]}}s.$ Therefore $s\edge{X_{[2,3]}}r$ is retrograde, and the result follows.
+Thus $\level(r) = (\jay+1,0,0)$ when $ \jay = 2 $ and $ \level(r) = (\jay + 2,0,0) $ when $ \jay = 1. $ In either case, the modified Giles-Selinger algorithm specifies the reduction step $r\nedge{X_{[2,3]}}s.$ Therefore $s\edge{X_{[2,3]}}r$ is retrograde, and the result follows.
 
 \subcase The pivot column of $s$ is of the form \[
 \boldsymbol{v} = \frac{1}{\delta^k}\begin{bmatrix}
@@ -1854,7 +1853,7 @@ and so the modified Giles-Selinger algorithm prescribes the syllable $H_{[1,3]}\
       \]
 Since $X_{[2,3]}$ does not affect the level of the state and $H_{[1,\alpha]}\omega^{h-\iota}_{[1]}$ are syllables, we have that $\level(t\edge{X_{[2,3]}}q)<\level(s).$
 
-Note that this case is essentially the same as Case~\ref{subcase-3.2}, with a simple permutation of the indices of the equations used. Almost all other cases are directly analogous to Case~\ref{case-2} in the same way; i.e., with suitable permutations of the indices of equations. Below, we detail the only case which substantially differs.
+Note that this case is essentially the same as Case~\ref{subcase-3.2}, with a simple permutation of the indices of the equations used. Almost all other cases are directly analogous to Case~\ref{case-3} in the same way; i.e., with suitable permutations of the indices of equations. Below, we detail the only case which substantially differs.
 
 \subcase\label{subcase-4.3} The pivot column of $s$ is of the form \[
 	\boldsymbol{v}=\frac{1}{\delta^k}\begin{bmatrix}

@@ -1,0 +1,13 @@
+\Title{Generators and Relations for the Group U₄(ℤ[1/√2, i])}
+\Author{Seth Eveson Murray Greylyn}
+\Copyright{Copyright 2014 Seth Eveson Murray Greylyn}
+\Keywords{quantum computing\sep 
+  synthesis of quantum circuits\sep 
+  circuit simplification\sep 
+  Clifford+T circuits\sep 
+  generators and relations\sep
+  unitary group}
+\Subject{We give a presentation by generators and relations of the
+ group U₄(ℤ[1/√2, i]) of unitary 4×4 matrices with entries in the ring
+ ℤ[1/√2, i]. This is motivated by the problem of exact synthesis for
+ the Clifford+T gate set in quantum computation.}

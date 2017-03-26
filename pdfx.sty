@@ -1,0 +1,338 @@
+%%
+%% This is file `pdfx.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pdfx.dtx  (with options: `package')
+%% 
+%%  Copyright (c) 2014, CV Radhakrishnan <cvr@river-valley.org>,
+%%    Han The Thanh <thanh@river-valley.org>,
+%%    Ross Moore <ross.moore@mq.edu.au>,
+%%    Peter Selinger <selinger@mathstat.dal.ca>
+%% 
+%%  This file may be distributed and/or modified under the conditions
+%%  of the LaTeX Project Public License, either version 1.2 of this
+%%  license or (at your option) any later version.  The latest version
+%%  of this license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%%  and version 1.2 or later is part of all distributions of LaTeX
+%%  version 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pdfx}
+  [2014/02/26 v1.5 PDF/X and PDF/A support (CVR/HTH/RRM)]
+
+% Not all combinations of the following parameters are meaningful.
+\newif\ifpdfx@x \pdfx@xfalse   % PDF/X mode
+\def\xmp@Part{1}               % PDF/A part: 1, 2, or 3
+\def\xmp@Conformance{B}        % Conformance level: A, B, or U
+\def\xmp@ReleaseDate{2005}     % 2001 for PDF/X-1, 2005 for PDF/A-1,
+                               % 2010 for PDF/A-2, 2012 for PDF/A-3.
+
+\DeclareOption{a-1a}{\global\pdfx@xfalse\def\xmp@Part{1}\def\xmp@Conformance{A}\def\xmp@ReleaseDate{2005}}
+\DeclareOption{a-1b}{\global\pdfx@xfalse\def\xmp@Part{1}\def\xmp@Conformance{B}\def\xmp@ReleaseDate{2005}}
+\DeclareOption{a-2a}{\global\pdfx@xfalse\def\xmp@Part{2}\def\xmp@Conformance{A}\def\xmp@ReleaseDate{2010}}
+\DeclareOption{a-2b}{\global\pdfx@xfalse\def\xmp@Part{2}\def\xmp@Conformance{B}\def\xmp@ReleaseDate{2010}}
+\DeclareOption{a-2u}{\global\pdfx@xfalse\def\xmp@Part{2}\def\xmp@Conformance{U}\def\xmp@ReleaseDate{2010}}
+\DeclareOption{a-3a}{\global\pdfx@xfalse\def\xmp@Part{3}\def\xmp@Conformance{A}\def\xmp@ReleaseDate{2012}}
+\DeclareOption{a-3b}{\global\pdfx@xfalse\def\xmp@Part{3}\def\xmp@Conformance{B}\def\xmp@ReleaseDate{2012}}
+\DeclareOption{a-3u}{\global\pdfx@xfalse\def\xmp@Part{3}\def\xmp@Conformance{U}\def\xmp@ReleaseDate{2012}}
+\DeclareOption{x-1a}{\global\pdfx@xtrue\def\xmp@Part{1}\def\xmp@Conformance{A}\def\xmp@ReleaseDate{2001}}
+
+\DeclareOption{pdf13}{\global\pdfminorversion=3 }
+\DeclareOption{pdf14}{\global\pdfminorversion=4 }
+\DeclareOption{pdf15}{\global\pdfminorversion=5 }
+\DeclareOption{pdf16}{\global\pdfminorversion=6 }
+\DeclareOption{pdf17}{\global\pdfminorversion=7 }
+
+\pdfminorversion=4
+\expandafter\ifx\csname pdfresetpageorigin\endcsname\relax\else
+ \pdfresetpageorigin=0
+\fi
+\ProcessOptions
+
+\ifpdfx@x
+ \pdfminorversion=3
+ \pdfobjcompresslevel=0
+ \expandafter\ifx\csname pdfinterwordspaceoff\endcsname\relax\else
+  \pdfinterwordspaceoff
+  \let\pdfinterwordspaceon\pdfinterwordspaceoff
+  \let\pdfinterwordspace\relax
+ \fi
+ \expandafter\ifx\csname pdfgeninterwordspace\endcsname\relax\else
+  \pdfgeninterwordspace=0
+ \fi
+ \pdfpageattr{/MediaBox[0 0 595 793]
+              /BleedBox[0 0 595 793]
+              /TrimBox[25 20 570 773]}
+\fi
+\ifnum\pdfminorversion >3 \relax
+ \pdfmapline{+dummy-space <dummy-space.pfb}
+ \expandafter\ifx\csname pdfgeninterwordspace\endcsname\relax\else
+  \pdfgeninterwordspace=1
+ \fi
+\fi
+\ifpdfx@x
+ \@ifpackageloaded{hyperref}{%
+  \hypersetup{draft,pdftex,pdfpagemode=UseNone,bookmarks=false,pdfversion=1.\the\pdfminorversion]}
+ }{%
+  \RequirePackage[draft,pdftex,pdfpagemode=UseNone,bookmarks=false,pdfversion=1.\the\pdfminorversion]{hyperref}
+ }%
+\else
+ \@ifpackageloaded{hyperref}{%
+  \hypersetup{pdftex,pdfa}%
+ }{%
+  \RequirePackage[pdftex,pdfa]{hyperref}
+ }%
+\fi
+
+%----------------------------------------------------------------------
+% Local commands. They are only brought into scope during the reading
+% of xmpdata.
+
+\def\pdfx@localcommands{
+ \def\Title##1{\gdef\xmp@Title{##1}}
+ \def\Author##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Author\expandafter{\@this}}
+ \def\Keywords##1{\def\@this{##1}%\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Keywords\expandafter{\@this}%
+  {\def\sep{, }\xdef\pdfx@Keywords{\xmp@Keywords}}%
+  }%
+ \def\Subject##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Subject\expandafter{\@this}}
+ \def\Creator##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Creator\expandafter{\@this}}
+ \def\Producer##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Producer\expandafter{\@this}}
+ \def\Volume##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Volume\expandafter{\@this}}
+ \def\Issue##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Issue\expandafter{\@this}}
+ \def\CoverDisplayDate##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@CoverDisplayDate\expandafter{\@this}}
+ \def\CoverDate##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@CoverDate\expandafter{\@this}}
+ \def\Copyright##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Copyright\expandafter{\@this}}
+ \def\Doi##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Doi\expandafter{\@this}}
+ \def\Lastpage##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Lastpage\expandafter{\@this}}
+ \def\Firstpage##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Firstpage\expandafter{\@this}}
+ \def\Journaltitle##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Journaltitle\expandafter{\@this}%
+  \gdef\xmp@Journal{journal}}
+ \def\Journalnumber##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Journalnumber\expandafter{\@this}}
+ \def\Org##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@Org\expandafter{\@this}}
+ \def\CreatorTool##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@CreatorTool\expandafter{\@this}}
+ \def\AuthoritativeDomain##1{\pdfstringdef\@this{##1}%
+  \expandafter\gdef\expandafter\xmp@AuthoritativeDomain\expandafter{\@this}}
+}
+
+%----------------------------------------------------------------------
+% Additional markup for use within XMP data. These macros are only
+% brought into scope during the reading of the xmp file.
+
+\def\pdfx@xmpmarkup{
+ \def\hash{\expandafter\@gobble\string\#}
+ \def\amp{\expandafter\@gobble\string\&}
+ \def\space{\expandafter\@gobble\string\ }
+ \def\unicode##1{\amp\hash x##1;}
+ \def\&{\unicode{0026}}
+ \def\copyright{\unicode{00A9}}
+ \let\TextCopyright\copyright  % for backward compatibility
+ \let\ \space
+ {\obeyspaces\gdef\sep{</rdf:li>^^J     <rdf:li>}}%
+}
+
+%----------------------------------------------------------------------
+% Defaults
+
+\def\xmp@Producer{pdfTeX}
+\def\xmp@Creator{\@pdfcreator}
+\def\xmp@CreatorTool{\xmp@Creator}
+
+\let\xmp@Title\@empty
+\let\xmp@Author\@empty
+\let\xmp@Keywords\@empty
+\let\pdfx@Keywords\@empty
+\let\xmp@Subject\@empty
+\let\xmp@Volume\@empty
+\let\xmp@Issue\@empty
+\let\xmp@CoverDisplayDate\@empty
+\let\xmp@CoverDate\@empty
+\let\xmp@Copyright\@empty
+\let\xmp@Doi\@empty
+\let\xmp@Lastpage\@empty
+\let\xmp@Firstpage\@empty
+\let\xmp@Journaltitle\@empty
+\let\xmp@Journal\@empty
+\let\xmp@Journalnumber\@empty
+\let\xmp@Org\@empty
+\let\xmp@AuthoritativeDomain\@empty
+
+%----------------------------------------------------------------------
+\def\pdfx@findUUID#1{\edef\pdfx@tmpstring{\pdfmdfivesum{#1}}
+     \expandafter\pdfx@eightofnine\pdfx@tmpstring\end}
+\def\pdfx@eightofnine#1#2#3#4#5#6#7#8#9\end{%
+     \xdef\pdfx@eightchars{#1#2#3#4#5#6#7#8}
+     \pdfx@fouroffive#9\end}
+\def\pdfx@fouroffive#1#2#3#4#5\end{\xdef\pdfx@ffourchars{#1#2#3#4}
+     \pdfx@sfouroffive#5\end}
+\def\pdfx@sfouroffive#1#2#3#4#5\end{\xdef\pdfx@sfourchars{#1#2#3#4}
+     \pdfx@tfouroffive#5\end}
+\def\pdfx@tfouroffive#1#2#3#4#5\end{\xdef\pdfx@tfourchars{#1#2#3#4}
+     \xdef\pdfx@laststring{#5}}
+
+\def\pdfx@uuid{\pdfx@eightchars-%
+          \pdfx@ffourchars-%
+          \pdfx@sfourchars-%
+          \pdfx@tfourchars-%
+          \pdfx@laststring}
+
+\pdfx@findUUID{\jobname.pdf}
+\edef\xmp@docid{\pdfx@uuid}
+\pdfx@findUUID{\pdfcreationdate}
+\edef\xmp@instid{\pdfx@uuid}
+
+\begingroup
+ \pdfx@localcommands
+ \InputIfFileExists{\jobname.xmpdata}{}{}
+\endgroup
+
+\RequirePackage{xmpincl}
+\def\xmp@convertDate{\pdfx@getYear}
+{\catcode`\D=12 \catcode`\:=12
+ \gdef\pdfx@getYear D:#1#2#3#4{\edef\pdfx@xYear{#1#2#3#4}\pdfx@getMonth}
+}
+\def\pdfx@getMonth#1#2{\edef\pdfx@xMonth{#1#2}\pdfx@getDay}
+\def\pdfx@getDay#1#2{\edef\pdfx@xDay{#1#2}\pdfx@getHour}
+\def\pdfx@getHour#1#2{\edef\pdfx@xHour{#1#2}\pdfx@getMin}
+\def\pdfx@getMin#1#2{\edef\pdfx@xMin{#1#2}\pdfx@getSec}
+\def\pdfx@getSec#1#2{\edef\pdfx@xSec{#1#2}\pdfx@getTZh}
+\def\pdfx@getTZh{\futurelet\pdfx@next\getTzh@branches}
+{\catcode`\@=11 \catcode`\Z=12 \catcode`\+=12 \catcode`\-=12
+\gdef\getTzh@branches{%
+ \ifx\pdfx@next Z\let\pdfx@getTzbranch\pdfx@getTznozone
+ \else\ifx\pdfx@next +\let\pdfx@getTzbranch\pdfx@getTzplus
+ \else\ifx\pdfx@next -\let\pdfx@getTzbranch\pdfx@getTzminus
+ \else\let\pdfx@getTzbranch\pdfx@getTzerror
+ \fi\fi\fi \pdfx@getTzbranch }
+\catcode`\0=12
+\gdef\pdfx@getTznozone Z#1\pdfx@getTzend{%
+ \edef\pdfx@xTzh{+00}\edef\pdfx@xTzm{00}}
+\gdef\pdfx@getTzplus +#1'#2'#3\pdfx@getTzend{%
+ \edef\pdfx@xTzh{+#1}\edef\pdfx@xTzm{#2}%
+ \ifx\relax#2\relax\def\pdfx@xTzm{00}\fi}
+\gdef\pdfx@getTzminus -#1'#2'#3\pdfx@getTzend{%
+ \edef\pdfx@xTzh{-#1}\edef\pdfx@xTzm{#2}%
+ \ifx\relax#2\relax\def\pdfx@xTzm{00}\fi}
+\expandafter\xmp@convertDate\pdfcreationdate''\pdfx@getTzend
+\xdef\pdfx@convDate{\pdfx@xYear\pdfx@xMonth\pdfx@xDay\pdfx@xHour\pdfx@xMin\pdfx@xSec\pdfx@xTzh'\pdfx@xTzm}%
+\xdef\xmp@convDate{\pdfx@xYear-\pdfx@xMonth-\pdfx@xDay T\pdfx@xHour:\pdfx@xMin:\pdfx@xSec\pdfx@xTzh:\pdfx@xTzm}%
+}% end of \catcode
+\ifpdfx@x
+ \def\@pctchar{\expandafter\@gobble\string\%}
+ \def\@bchar{\expandafter\@gobble\string\\}
+ \immediate\pdfobj stream attr{/N 4}  file{FOGRA39L.icc}
+ \edef\OBJ@CVR{\the\pdflastobj}
+ \pdfcatalog{%
+   /OutputIntents [ <<
+   /Type/OutputIntent
+   /S/GTS_PDFX
+   /OutputCondition (FOGRA39)
+   /OutputConditionIdentifier (FOGRA39 \@bchar(ISO Coated v2
+    300\@pctchar\space \@bchar(ECI\@bchar)\@bchar))
+   /DestOutputProfile \OBJ@CVR\space 0 R
+   /RegistryName(http://www.color.org)
+  >> ]}
+\else
+ \immediate\pdfobj stream attr{/N 3} file{sRGB_IEC61966-2-1_black_scaled.icc}
+ \edef\OBJ@RVT{\the\pdflastobj}
+ \pdfcatalog{%
+   /ViewerPreferences <</DisplayDocTitle true >>
+   /OutputIntents [ <<
+   /Type /OutputIntent
+   /S/GTS_PDFA1
+   /DestOutputProfile \OBJ@RVT\space 0 R
+   /OutputConditionIdentifier (sRGB IEC61966-2-1 black scaled)
+   /Info(sRGB IEC61966-2-1 black scaled)
+  >> ]}
+\fi
+\begingroup
+ \ifpdfx@x
+  \def\xmp@template{{pdfx-1a}}%
+ \else
+  \def\xmp@template{{pdfa}}%
+ \fi
+ \pdfx@xmpmarkup
+ \expandafter\includexmp\xmp@template
+\endgroup
+
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+\ifpdfx@x
+ {\def\sep{,}%
+  \pdfinfo{
+      \ifx\xmp@Title\@empty\relax\else /Title(\xmp@Title)\fi
+      \ifx\xmp@Author\@empty\relax\else /Author(\xmp@Author)\fi
+      \ifx\xmp@Subject\@empty\relax\else /Subject(\xmp@Subject)\fi
+      \ifx\xmp@Keywords\@empty\relax\else /Keywords(\xmp@Keywords)\fi
+      /Creator(\xmp@Creator)%
+      /CreationDate(D:\pdfx@convDate)%
+      /ModDate(D:\pdfx@convDate)%
+      /Producer(\xmp@Producer)%
+      /Trapped /False
+      /GTS_PDFXVersion (PDF/X-1:2001)%
+      /GTS_PDFXConformance (PDF/X-1a:2001)%
+  }}%
+\else
+ \def\pdfx@confA{a}%
+ \def\pdfx@confB{b}%
+ \def\pdfx@confU{u}%
+ \def\xmp@conf{\csname pdfx@conf\xmp@Conformance\endcsname}%
+ \def\PDF@FinishDoc{%
+  \Hy@UseMaketitleInfos
+  {\def\sep{, }%
+   \pdfinfo{%
+     \ifx\xmp@Title\@empty\else /Title(\xmp@Title)\fi
+     \ifx\xmp@Author\@empty\else /Author(\xmp@Author)\fi
+     \ifx\xmp@Subject\@empty\else /Subject(\xmp@Subject)\fi
+     \ifx\xmp@Keywords\@empty\else /Keywords(\xmp@Keywords)\fi
+     /Creator(\xmp@Creator)%
+    \ifx\@pdfcreationdate\@empty
+      /CreationDate(D:\pdfx@convDate)%
+    \else
+      /CreationDate(\@pdfcreationdate)%
+    \fi
+    \ifx\@pdfmoddate\@empty
+      /ModDate(D:\pdfx@convDate)%
+    \else
+      /ModDate(\@pdfmoddate)%
+    \fi
+    /Producer(\xmp@Producer)%
+    /Trapped /False
+    /GTS_PDFA1Version (PDF/A-\xmp@Part\xmp@conf:\xmp@ReleaseDate)%
+  }}%
+ }
+ \fi
+ \Hy@DisableOption{pdfauthor}%
+ \Hy@DisableOption{pdftitle}%
+ \Hy@DisableOption{pdfsubject}%
+ \Hy@DisableOption{pdfcreator}%
+ \Hy@DisableOption{pdfcreationdate}%
+ \Hy@DisableOption{pdfmoddate}%
+ \Hy@DisableOption{pdfproducer}%
+ \Hy@DisableOption{pdfkeywords}%
+\endinput
+%%
+%% End of file `pdfx.sty'.
+
